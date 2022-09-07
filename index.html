@@ -7,75 +7,73 @@
     <title>Storefront</title>
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-<body>
+<body onload="pintarProductos()">
 
     <header>
 
         <div class="header-top">
-            <h1>
-                <a href="#">
-                    Storefront
-                </a>
-            </h1>
+            <a href="#" class="logo"> Storefront </a>
             <div>
-                <a href="#" class="mx-3">
-                    My count
-                </a>
+                <a href="#" class="mx-3"> My count </a>
                 <input type="text" name="search" id="search" placeholder="Search Products...">
             </div>
         </div>
         <div class="header-bottom">
             <nav>
                 <ul>
-                    <li class="mx-1"> <a href="#"> Shop </a> </li>
-                    <li class="mx-1"> <a href="#"> About </a> </li>
-                    <li class="mx-1"> <a href="#"> Contact </a> </li>
+                    <li class="mx-1"> 
+                        <a href="#shop"> Shop </a> 
+                    </li>
+                    <li class="mx-1"> 
+                        <a href="#"> About </a> 
+                    </li>
+                    <li class="mx-1"> 
+                        <a href="#"> Contact </a> 
+                    </li>
                 </ul>
             </nav>
             <div class="shopping">
                 <p class="mx-2"> $ 0.0 </p>
                 <p class="mx-2"> 0 items </p>
-                <button class="px-2"> Shopping car </button>
+                <a> <i class="fa-solid fa-cart-shopping fa-xl"></i> </a>
             </div>
         </div>
     </header>
 
-    <div class="slide">
-        <div class="slide-inner">
-            <input class="slide-open" type="radio" id="slide-1" 
-                  name="slide" aria-hidden="true" hidden="" checked="checked">
-            <div class="slide-item">
-                <img src="./assets/img/People_showing_gestures_01.jpg">
-            </div>
-            <input class="slide-open" type="radio" id="slide-2" 
-                  name="slide" aria-hidden="true" hidden="">
-            <div class="slide-item">
-                <img src="https://www.migueltroyano.com/wp-content/uploads/2020/09/postgres_copy.png">
-            </div>
-            <input class="slide-open" type="radio" id="slide-3" 
-                  name="slide" aria-hidden="true" hidden="">
-            <div class="slide-item">
-                <img src="https://www.migueltroyano.com/wp-content/uploads/2020/09/excel_guardar_como_csv.jpg">
-            </div>
-            <label for="slide-3" class="slide-control prev control-1">‹</label>
-            <label for="slide-2" class="slide-control next control-1">›</label>
-            <label for="slide-1" class="slide-control prev control-2">‹</label>
-            <label for="slide-3" class="slide-control next control-2">›</label>
-            <label for="slide-2" class="slide-control prev control-3">‹</label>
-            <label for="slide-1" class="slide-control next control-3">›</label>
-            <ol class="slide-indicador">
-                <li>
-                    <label for="slide-1" class="slide-circulo">•</label>
-                </li>
-                <li>
-                    <label for="slide-2" class="slide-circulo">•</label>
-                </li>
-                <li>
-                    <label for="slide-3" class="slide-circulo">•</label>
-                </li>
-            </ol>
-        </div>
-    </div>
+    <main>
 
+        <section class="imagen">
+            <img src="./assets/img/clothes.jpg" alt="imagen" width="700px">
+        </section>
+
+        <section class="shop" id="shop">
+            <h2> Shop </h2>
+
+            <div class="list-products" id="list-products">
+                
+            </div>
+            
+        </section>
+
+    </main>
+
+    <footer>
+        <div>
+            <a href="#" class="logo"> Storefront </a>
+            <p>Company name @2022</p>
+        </div>
+        <div class="social-networks">
+            <ul>
+                <li> <i class="fa-brands fa-facebook fa-2xl"></i> </li>
+                <li> <i class="fa-brands fa-twitter fa-2xl"></i> </li>
+                <li> <i class="fa-brands fa-youtube fa-2xl"></i> </li>
+                <li> <i class="fa-brands fa-instagram fa-2xl"></i>  </li>
+                <li> <i class="fa-solid fa-envelope fa-2xl"></i> </li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/79a952d83e.js" crossorigin="anonymous"></script>
+    <script src="./assets/js/main.js"></script>
 </body>
 </html>
