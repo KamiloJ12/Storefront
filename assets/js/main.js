@@ -155,3 +155,20 @@ list_products.addEventListener('click', (e) => {
     }
 
 });
+
+const shopping_cart = document.getElementById('shopping-cart');
+const shopping_cart_open = document.getElementById('shopping_cart_open');
+shopping_cart_open.addEventListener('click', () => {
+    shopping_cart.classList.add('show');
+});
+
+const shopping_cart_close = document.getElementById('shopping-cart-close');
+shopping_cart.addEventListener('click', () => {
+    shopping_cart.classList.remove('show');
+});
+
+const nav_toggle = document.getElementById('nav_toogle');
+const nav_menu = document.getElementById('nav_menu');
+nav_toggle.addEventListener('click', () => {
+    nav_menu.classList.add('show');
+});
