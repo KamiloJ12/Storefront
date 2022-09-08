@@ -117,6 +117,11 @@ header {
     justify-content: space-between;
 }
 
+.cart_close {
+    cursor: pointer;
+    align-items: flex-end;
+}
+
 /* section -image*/
 .imagen {
     display: flex;
@@ -220,6 +225,7 @@ footer .logo {
     height: 100vh;
     transition: .3s;
     z-index: 1;
+    color: black;
 }
 
 .show {

@@ -167,13 +167,20 @@ shopping_cart.addEventListener('click', () => {
     shopping_cart.classList.remove('show');
 });
 
-const nav_toggle = document.getElementById('nav_toogle');
-const nav_menu = document.getElementById('nav_menu');
-nav_toggle.addEventListener('click', () => {
-    nav_menu.classList.add('show');
-});
 
-const nav_close = document.getElementById('nav_close');
-nav_close.addEventListener('click', () => {
-    nav_menu.classList.remove('show');
-});
+const container = document.querySelector('.nav')
+const menu = document.getElementById('nav_menu')
+
+container.addEventListener('click', function (e) {
+  if(e.target.matches('.nav_open_icon')) {
+    menu.classList.add('show');
+  }
+
+  if(e.target.matches('.nav_close_icon')) {
+    menu.classList.remove('show');
+  }
+
+  if (e.target.matches('.nav_link')) {
+    menu.classList.remove('show');
+  }
+})
