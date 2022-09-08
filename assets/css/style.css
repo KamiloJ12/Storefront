@@ -246,10 +246,15 @@ footer .logo {
         width: 100%;
         height: 100vh;
         transition: .3s;
+        z-index: 1;
     }
 
     
     .show {
         right: 0;
+    }
+
+    .nav a {
+        color: rgb(10, 0, 0);
     }
 }
