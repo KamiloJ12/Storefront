@@ -43,7 +43,7 @@ function pintarProductos() {
                 <div class="card-product-body">
                     <h4 class="card-product-title">${producto.name}</h4>
                     <h5> ${producto.cantidad} unidades disponibles </h5>
-                    <p class="card-product-price"> ${producto.price.toLocaleString('es-CO', {style: 'currency', currency: 'COP', minimumFractionDigits: 2})} </p>
+                    <p class="card-product-price"> ${producto.price.toLocaleString('en-US', {style: 'currency', currency: 'USD', minimumFractionDigits: 2})} </p>
                     <button class="card-product-button"> <i class="fa-solid fa-plus fa-xl add-product" data-id="${producto.id}"></i> </button>
                 </div>
             </div>
@@ -125,7 +125,7 @@ function comprar() {
 
 function actualizarDatos() {
     const element_price = document.getElementById('element_price');
-    element_price.innerHTML = total().toLocaleString('es-CO', {style: 'currency', currency: 'COP', minimumFractionDigits: 2});
+    element_price.innerHTML = total().toLocaleString('en-US', {style: 'currency', currency: 'USD', minimumFractionDigits: 2});
 
     const element_count = document.getElementById('element_count');
     element_count.innerHTML = `${contarArticulos()} items`;

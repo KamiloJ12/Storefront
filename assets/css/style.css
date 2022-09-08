@@ -152,6 +152,10 @@ header {
     cursor: pointer;
 }
 
+.card-product-button:hover {
+    background-color: #FF0000;
+}
+
 /* footer */
 footer {
     background-color: var(--color-primary);
