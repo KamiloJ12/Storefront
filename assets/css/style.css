@@ -81,7 +81,7 @@ header {
     color: white;
 }
 
-.nav_toggle {
+.nav_toggle, .nav_toggle_close {
     cursor: pointer;
 }
 
@@ -232,7 +232,7 @@ footer .logo {
 }
 
 @media screen and (min-width: 767px) {
-    .nav_toggle {
+    .nav_toggle, .nav_toggle_close {
         display: none;
     }
 }
@@ -254,7 +254,16 @@ footer .logo {
         right: 0;
     }
 
+    .nav p {
+        color: black;
+    }
+
     .nav a {
-        color: rgb(10, 0, 0);
+        color: black;
+    }
+
+    .nav_menu {
+        justify-content: center;
+        flex-direction: column;
     }
 }
