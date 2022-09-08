@@ -247,4 +247,9 @@ footer .logo {
         height: 100vh;
         transition: .3s;
     }
+
+    
+    .show {
+        right: 0;
+    }
 }
