@@ -44,6 +44,7 @@ section {
 
 /* padding */
 
+
 .px-1 {
     padding-left: 10px;
     padding-right: 10px;
@@ -266,4 +267,20 @@ footer .logo {
         justify-content: center;
         flex-direction: column;
     }
+
+    .nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav ul li, .nav .shopping p, .nav .shopping a {
+        margin: 10px;
+    }
+
+    .nav .shopping {
+        flex-direction: column;
+        align-items: center;
+    }
+
+
 }

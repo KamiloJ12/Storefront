@@ -172,3 +172,8 @@ const nav_menu = document.getElementById('nav_menu');
 nav_toggle.addEventListener('click', () => {
     nav_menu.classList.add('show');
 });
+
+const nav_close = document.getElementById('nav_close');
+nav_close.addEventListener('click', () => {
+    nav_menu.classList.remove('show');
+});
