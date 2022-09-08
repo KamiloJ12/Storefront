@@ -4,28 +4,33 @@ const productos = [
         id: 1,
         name: 'Producto #1',
         imageUrl: './assets/img/t-shirt.jpg',
-        price: 1500000
+        price: 1500000,
+        cantidad: 5
     },
     {
         id: 2,
         name: 'Producto #2',
         imageUrl: './assets/img/t-shirt.jpg',
-        price: 2500000
+        price: 2500000,
+        cantidad: 10
     },
     {
         id: 3,
         name: 'Producto #3',
         imageUrl: './assets/img/t-shirt.jpg',
-        price: 1800000
+        price: 1800000,
+        cantidad: 8
     },
     {
         id: 4,
         name: 'Producto #4',
         imageUrl: './assets/img/t-shirt.jpg',
-        price: 2100000
+        price: 2100000,
+        cantidad: 21
     }
 ];
-let carrito = [];
+let carrito = [
+];
 
 /* Productos */
 function pintarProductos() {
@@ -36,9 +41,10 @@ function pintarProductos() {
             <div class="card-product">
                 <img src="${producto.imageUrl}" alt="" class="card-product-image">
                 <div class="card-product-body">
-                    <h5 class="card-product-title">${producto.name}</h5>
+                    <h4 class="card-product-title">${producto.name}</h4>
+                    <h5> ${producto.cantidad} unidades disponibles </h5>
                     <p class="card-product-price"> ${producto.price.toLocaleString('es-CO', {style: 'currency', currency: 'COP', minimumFractionDigits: 2})} </p>
-                    <button class="card-product-add-button" onclick="agregarAlCarrito(${producto.id})"> <i class="fa-solid fa-plus fa-xl"></i> </button>
+                    <button class="card-product-button"> <i class="fa-solid fa-plus fa-xl add-product" data-id="${producto.id}"></i> </button>
                 </div>
             </div>
         `;
@@ -48,9 +54,81 @@ function pintarProductos() {
 
 /* Carrito */
 function agregarAlCarrito(id) {
-    alert(`Producto ${id} agregado al carrito`);
+    const articuloEncontrado = productos.find( producto => producto.id == id);
+    if(articuloEncontrado?.cantidad > 0) {
+        const aritculoEnCarrito = carrito.find( producto => producto.id == id);
+        if( !aritculoEnCarrito ){
+            carrito.push({id, cantidad: 1});
+            actualizarDatos();
+        }
+    } 
 }
 
 function removerDelCarrito(id) {
-
+    carrito = carrito.filter( producto => producto.id != id);
 }
+
+function aumentarCantidadProductoCarrito(id) {
+    const aritculoEnCarrito = carrito.find( producto => producto.id == id);
+    const articuloEncontrado = productos.find( producto => producto.id == id);
+    
+    if( aritculoEnCarrito?.cantidad + 1 < articuloEncontrado?.cantidad) {
+        aritculoEnCarrito.cantidad++;
+        articuloEncontrado.cantidad--;
+    }
+}
+
+function disminuirCantidadProductoCarrito(id) {
+    const aritculoEnCarrito = carrito.find( producto => producto.id == id);
+    const articuloEncontrado = productos.find( producto => producto.id == id);
+    
+    if( aritculoEnCarrito?.cantidad > 0) {
+        aritculoEnCarrito.cantidad--;
+        articuloEncontrado.cantidad++;
+    }
+}
+
+function contarArticulos() {
+    let totalArticulos = 0;
+    for( let producto of carrito ) {
+        totalArticulos += producto.cantidad;
+    }
+    return totalArticulos;
+}
+
+function total() {
+    let suma = 0;
+    for( let productoCarrito of carrito ) {
+        const productoEcontrado = productos.find( producto => producto.id == productoCarrito.id );
+        suma += productoEcontrado.price * productoCarrito.cantidad;
+    }
+    return suma;
+}
+
+function comprar() {
+    for( let productoCarrito of carrito ) {
+        let productoEcontrado = productos.find( producto => producto.id == productoCarrito.id );
+        productoEcontrado.cantidad -= productoCarrito.cantidad;
+    }
+    carrito = [];
+}
+
+function actualizarDatos() {
+    const element_price = document.getElementById('element_price');
+    element_price.innerHTML = total().toLocaleString('es-CO', {style: 'currency', currency: 'COP', minimumFractionDigits: 2});
+
+    const element_count = document.getElementById('element_count');
+    element_count.innerHTML = `${contarArticulos()} items`;
+}
+
+pintarProductos();
+actualizarDatos();
+
+const list_products = document.getElementById('list-products');
+list_products.addEventListener('click', (e) => {
+    if(e.target.classList.contains('add-product')){
+        const id = e.target.dataset.id;
+        agregarAlCarrito(+id);
+    }
+
+});
