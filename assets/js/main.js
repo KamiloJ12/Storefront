@@ -60,12 +60,17 @@ function agregarAlCarrito(id) {
         if( !aritculoEnCarrito ){
             carrito.push({id, cantidad: 1});
             actualizarDatos();
+        } else {
+            monstrarAlerta('El producto ya se encuentra en el carrito');
         }
-    } 
+    } else {
+        monstrarAlerta('No hay existencias del producto');
+    }
 }
 
 function removerDelCarrito(id) {
     carrito = carrito.filter( producto => producto.id != id);
+    monstrarAlerta('Se ha eliminado un producto del carrito');
 }
 
 function aumentarCantidadProductoCarrito(id) {
@@ -75,6 +80,8 @@ function aumentarCantidadProductoCarrito(id) {
     if( aritculoEnCarrito?.cantidad + 1 < articuloEncontrado?.cantidad) {
         aritculoEnCarrito.cantidad++;
         articuloEncontrado.cantidad--;
+    } else {
+        monstrarAlerta('No hay existencias del producto');
     }
 }
 
@@ -85,6 +92,8 @@ function disminuirCantidadProductoCarrito(id) {
     if( aritculoEnCarrito?.cantidad > 0) {
         aritculoEnCarrito.cantidad--;
         articuloEncontrado.cantidad++;
+    } else {
+        removerDelCarrito(id);
     }
 }
 
@@ -110,6 +119,7 @@ function comprar() {
         let productoEcontrado = productos.find( producto => producto.id == productoCarrito.id );
         productoEcontrado.cantidad -= productoCarrito.cantidad;
     }
+    monstrarAlerta('Se ha realizado una compra exitosa');
     carrito = [];
 }
 
@@ -119,6 +129,19 @@ function actualizarDatos() {
 
     const element_count = document.getElementById('element_count');
     element_count.innerHTML = `${contarArticulos()} items`;
+}
+
+function monstrarAlerta( message = 'Ocurrio un error' ) {
+    const messages = document.getElementById('messages');
+    messages.innerHTML = `
+        <div class="message">
+            <p class="message-text">${message}</p>
+        </div>
+    `;
+    setTimeout(() => {
+        messages.innerHTML=''
+    }, 5000);
+     
 }
 
 pintarProductos();
@@ -132,3 +155,5 @@ list_products.addEventListener('click', (e) => {
     }
 
 });
+
+monstrarAlerta();

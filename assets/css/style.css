@@ -180,3 +180,16 @@ footer .logo {
 .social-networks ul li {
     padding: 10px;
 }
+
+.messages {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+}
+
+.message {
+    background-color: rgb(255, 196, 0);
+    color: whitesmoke;
+    padding: 10px 20px;
+    border-radius: 15px;
+}
