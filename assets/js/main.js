@@ -155,5 +155,3 @@ list_products.addEventListener('click', (e) => {
     }
 
 });
-
-monstrarAlerta();
