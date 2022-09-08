@@ -65,7 +65,7 @@ a {
 }
 
 .img-primary {
-    width: 700px;
+    width: 600px;
 }
 
 /* header */
@@ -84,7 +84,7 @@ header {
     color: white;
 }
 
-.nav_toggle, .nav_close {
+.nav_toggle, .nav_close{
     cursor: pointer;
 }
 
@@ -120,9 +120,12 @@ header {
 }
 
 .cart_close {
+    padding: 30px;
+    justify-content: flex-end;
+    display: flex;
     cursor: pointer;
-    align-items: flex-end;
 }
+
 
 /* section -image*/
 .imagen {
