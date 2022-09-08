@@ -64,7 +64,9 @@ a {
     text-decoration: none;
 }
 
-
+.img-primary {
+    width: 700px;
+}
 
 /* header */
 
@@ -284,5 +286,8 @@ footer .logo {
         align-items: center;
     }
 
+    .img-primary {
+        width: 400px;
+    }
 
 }
