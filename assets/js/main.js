@@ -129,6 +129,26 @@ function actualizarDatos() {
 
     const element_count = document.getElementById('element_count');
     element_count.innerHTML = `${contarArticulos()} items`;
+
+    let innertHtml = '';
+    const cart = document.getElementById('cart-list');
+    for(let productoCarrito of carrito ) {
+        const producto = productos.find( p => p.id == productoCarrito.id );
+        console.log( producto );
+        innertHtml += `
+            <div class="card-product">
+                <img src="${producto.imageUrl}" alt="" class="card-product-image">
+                <div class="card-product-body">
+                    <h4 class="card-product-title">${producto.name}</h4>
+                    <h5> ${producto.cantidad} unidades disponibles </h5>
+                    <p class="card-product-price"> ${producto.price.toLocaleString('en-US', {style: 'currency', currency: 'USD', minimumFractionDigits: 2})} </p>
+                    <button class="card-product-button"> <i class="fa-solid fa-plus fa-xl add-product" data-id="${producto.id}"></i> </button>
+                </div>
+            </div>
+        `;
+    }
+    cart.innerHTML = innertHtml;
+
 }
 
 function monstrarAlerta( message = 'Ocurrio un error' ) {
