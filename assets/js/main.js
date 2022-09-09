@@ -153,9 +153,9 @@ function comprar() {
         let productoEcontrado = productos.find( producto => producto.id == productoCarrito.id );
         productoEcontrado.cantidad -= productoCarrito.cantidad;
     }
+    alert(`Se ha realiszado un comprar exitosa \n de ${contarArticulos()} articulos por un valor de ${total()}`);
     carrito = [];
     actualizarDatos();
-    alert(`Se ha realiszado un comprar exitosa \n de ${contarArticulos()} articulos por un valor de ${total()}`);
 }
 
 function actualizarDatos() {
