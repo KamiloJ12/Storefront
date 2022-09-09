@@ -65,7 +65,11 @@ function pintarCarrito() {
                     <h4 class="card-product-title">${producto.name}</h4>
                     <h5> ${producto.cantidad} unidades disponibles </h5>
                     <p class="card-product-price"> ${producto.price.toLocaleString('en-US', {style: 'currency', currency: 'USD', minimumFractionDigits: 2})} </p>
-                    <button class="card-product-button"> <i class="fa-solid fa-plus fa-xl add-product" data-id="${producto.id}"></i> </button>
+                    <h5> ${productoCarrito.cantidad} unidades agregadas </h5>
+                    <p class="card-product-price"> ${ (producto.price * productoCarrito.cantidad).toLocaleString('en-US', {style: 'currency', currency: 'USD', minimumFractionDigits: 2})} </p>
+                    <button class="card-product-button-add"> <i class="fa-solid fa-plus fa-xl add-product-cart" data-id="${producto.id}"></i> </button>
+                    <button class="card-product-button-sub"> <i class="fa-solid fa-minus fa-xl sub-product-cart" data-id="${producto.id}"></i> </button>
+                    <button class="card-product-button-rem"> <i class="fa-solid fa-trash fa-xl remove-product-cart" data-id="${producto.id}"></i> </button>
                 </div>
             </div>
         `;
@@ -105,7 +109,7 @@ function aumentarCantidadProductoCarrito(id) {
     const aritculoEnCarrito = carrito.find( producto => producto.id == id);
     const articuloEncontrado = productos.find( producto => producto.id == id);
     
-    if( aritculoEnCarrito?.cantidad + 1 < articuloEncontrado?.cantidad) {
+    if( articuloEncontrado?.cantidad > 0) {
         aritculoEnCarrito.cantidad++;
         articuloEncontrado.cantidad--;
         actualizarDatos();
@@ -148,10 +152,10 @@ function comprar() {
     for( let productoCarrito of carrito ) {
         let productoEcontrado = productos.find( producto => producto.id == productoCarrito.id );
         productoEcontrado.cantidad -= productoCarrito.cantidad;
-        actualizarDatos();
     }
-    monstrarAlerta('Se ha realizado una compra exitosa');
     carrito = [];
+    actualizarDatos();
+    alert(`Se ha realiszado un comprar exitosa \n de ${contarArticulos()} articulos por un valor de ${total()}`);
 }
 
 function actualizarDatos() {
@@ -175,7 +179,7 @@ function monstrarAlerta( message = 'Ocurrio un error' ) {
     `;
     setTimeout(() => {
         messages.innerHTML=''
-    }, 5000);
+    }, 2000);
      
 }
 
@@ -188,17 +192,33 @@ list_products.addEventListener('click', (e) => {
         const id = e.target.dataset.id;
         agregarAlCarrito(+id);
     }
+});
+
+const cart_list = document.getElementById('cart-list');
+cart_list.addEventListener('click', (e) => {
+    if(e.target.classList.contains('add-product-cart')){
+        const id = e.target.dataset.id;
+        aumentarCantidadProductoCarrito(+id);
+    }
+    if(e.target.classList.contains('sub-product-cart')){
+        const id = e.target.dataset.id;
+        disminuirCantidadProductoCarrito(+id);
+    }
+    if(e.target.classList.contains('remove-product-cart')){
+        const id = e.target.dataset.id;
+        removerDelCarrito(+id);
+    }
 
 });
 
 const shopping_cart = document.getElementById('shopping-cart');
-const shopping_cart_open = document.getElementById('shopping_cart_open');
+const shopping_cart_open = document.getElementById('shopping-cart-open');
 shopping_cart_open.addEventListener('click', () => {
     shopping_cart.classList.add('show');
 });
 
 const shopping_cart_close = document.getElementById('shopping-cart-close');
-shopping_cart.addEventListener('click', () => {
+shopping_cart_close.addEventListener('click', () => {
     shopping_cart.classList.remove('show');
 });
 
@@ -218,4 +238,9 @@ container.addEventListener('click', function (e) {
   if (e.target.matches('.nav_link')) {
     menu.classList.remove('show');
   }
-})
+});
+
+const btn_buy = document.getElementById('btn-buy');
+btn_buy.addEventListener('click', () => {
+    comprar();
+});
