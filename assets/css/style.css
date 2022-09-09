@@ -126,7 +126,6 @@ header {
     cursor: pointer;
 }
 
-
 /* section -image*/
 .imagen {
     display: flex;
@@ -231,6 +230,10 @@ footer .logo {
     transition: .3s;
     z-index: 1;
     color: black;
+    align-items:center;
+    text-align: center;
+    justify-content: center;
+    overflow-y: auto;
 }
 
 .show {

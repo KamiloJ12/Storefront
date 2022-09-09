@@ -52,6 +52,28 @@ function pintarProductos() {
     list_products.innerHTML = innertHtml;
 }
 
+function pintarCarrito() {
+    let innertHtml = '';
+    const cart = document.getElementById('cart-list');
+    for(let productoCarrito of carrito ) {
+        const producto = productos.find( p => p.id == productoCarrito.id );
+        console.log( producto );
+        innertHtml += `
+            <div class="card-product">
+                <img src="${producto.imageUrl}" alt="" class="card-product-image">
+                <div class="card-product-body">
+                    <h4 class="card-product-title">${producto.name}</h4>
+                    <h5> ${producto.cantidad} unidades disponibles </h5>
+                    <p class="card-product-price"> ${producto.price.toLocaleString('en-US', {style: 'currency', currency: 'USD', minimumFractionDigits: 2})} </p>
+                    <button class="card-product-button"> <i class="fa-solid fa-plus fa-xl add-product" data-id="${producto.id}"></i> </button>
+                </div>
+            </div>
+        `;
+    }
+    cart.innerHTML = innertHtml;
+}
+
+
 /* Carrito */
 function agregarAlCarrito(id) {
     const articuloEncontrado = productos.find( producto => producto.id == id);
@@ -59,6 +81,7 @@ function agregarAlCarrito(id) {
         const aritculoEnCarrito = carrito.find( producto => producto.id == id);
         if( !aritculoEnCarrito ){
             carrito.push({id, cantidad: 1});
+            articuloEncontrado.cantidad--;
             actualizarDatos();
         } else {
             monstrarAlerta('El producto ya se encuentra en el carrito');
@@ -69,7 +92,12 @@ function agregarAlCarrito(id) {
 }
 
 function removerDelCarrito(id) {
+    productoCarrito = carrito.find( producto => producto.id == id);
+    productoEcontrado = productos.find( producto => producto.id == id);
+
+    productoEcontrado.cantidad += productoCarrito.cantidad;
     carrito = carrito.filter( producto => producto.id != id);
+    actualizarDatos();
     monstrarAlerta('Se ha eliminado un producto del carrito');
 }
 
@@ -80,6 +108,7 @@ function aumentarCantidadProductoCarrito(id) {
     if( aritculoEnCarrito?.cantidad + 1 < articuloEncontrado?.cantidad) {
         aritculoEnCarrito.cantidad++;
         articuloEncontrado.cantidad--;
+        actualizarDatos();
     } else {
         monstrarAlerta('No hay existencias del producto');
     }
@@ -92,6 +121,7 @@ function disminuirCantidadProductoCarrito(id) {
     if( aritculoEnCarrito?.cantidad > 0) {
         aritculoEnCarrito.cantidad--;
         articuloEncontrado.cantidad++;
+        actualizarDatos();
     } else {
         removerDelCarrito(id);
     }
@@ -118,6 +148,7 @@ function comprar() {
     for( let productoCarrito of carrito ) {
         let productoEcontrado = productos.find( producto => producto.id == productoCarrito.id );
         productoEcontrado.cantidad -= productoCarrito.cantidad;
+        actualizarDatos();
     }
     monstrarAlerta('Se ha realizado una compra exitosa');
     carrito = [];
@@ -130,24 +161,8 @@ function actualizarDatos() {
     const element_count = document.getElementById('element_count');
     element_count.innerHTML = `${contarArticulos()} items`;
 
-    let innertHtml = '';
-    const cart = document.getElementById('cart-list');
-    for(let productoCarrito of carrito ) {
-        const producto = productos.find( p => p.id == productoCarrito.id );
-        console.log( producto );
-        innertHtml += `
-            <div class="card-product">
-                <img src="${producto.imageUrl}" alt="" class="card-product-image">
-                <div class="card-product-body">
-                    <h4 class="card-product-title">${producto.name}</h4>
-                    <h5> ${producto.cantidad} unidades disponibles </h5>
-                    <p class="card-product-price"> ${producto.price.toLocaleString('en-US', {style: 'currency', currency: 'USD', minimumFractionDigits: 2})} </p>
-                    <button class="card-product-button"> <i class="fa-solid fa-plus fa-xl add-product" data-id="${producto.id}"></i> </button>
-                </div>
-            </div>
-        `;
-    }
-    cart.innerHTML = innertHtml;
+    pintarProductos();
+    pintarCarrito();
 
 }
 
