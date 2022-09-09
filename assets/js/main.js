@@ -153,7 +153,7 @@ function comprar() {
         let productoEcontrado = productos.find( producto => producto.id == productoCarrito.id );
         productoEcontrado.cantidad -= productoCarrito.cantidad;
     }
-    alert(`Se ha realiszado un comprar exitosa \n de ${contarArticulos()} articulos por un valor de ${total()}`);
+    alert(`Se ha realiszado un comprar exitosa \n de ${contarArticulos()} articulos por un valor de ${ total().toLocaleString('en-US', {style: 'currency', currency: 'USD', minimumFractionDigits: 2}) }`);
     carrito = [];
     actualizarDatos();
 }
